@@ -1,0 +1,35 @@
+<launch>
+
+  <node pkg="svo_ros" type="vo" name="svo" clear_params="true" output="screen">
+
+    <!-- Camera topic to subscribe to -->
+    <!-- <param name="cam_topic" value="/guidance/left_image" type="str" /> -->
+    <!-- <param name="cam_topic" value="/camera/image_raw" type="str" />-->
+	<param name="cam_topic" value="/iarc007/mono_video1" type="str" /> 
+
+    <!-- Camera calibration file -->
+     <rosparam file="$(find svo_ros)/param/camera_pinhole.yaml" />
+	<!-- <rosparam file="$(find svo_ros)/param/camera_atan.yaml" />-->
+
+    <!-- Default parameter settings: choose between vo_fast and vo_accurate -->
+    <rosparam file="$(find svo_ros)/param/vo_accurate.yaml" />
+    
+    <!-- Initial camera orientation, make it point downwards -->
+    <param name="init_rx" value="3.14" />
+    <param name="init_ry" value="0.00" />
+    <param name="init_rz" value="0.00" />
+
+    <!-- 原始数据是 120 30 -->
+    <!-- <param name="max_fts" value="120 150 "  />	-->
+<param name="max_fts" value="150 "  />
+    <param name="grid_size" value="25" />	
+    <!-- <param name="grid_size" value="30" />-->
+    <param name="quality_max_outliers" value="25" /> 
+	 
+    <!-- <param name="poseoptim_thresh" value="2.0" /> -->
+         <param name="kfselect_mindist" value="0.08" />
+	
+ 
+  </node>
+
+</launch>
